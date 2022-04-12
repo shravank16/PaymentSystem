@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.PaymentSystem.entity.Bill;
 import com.example.PaymentSystem.entity.Biller;
 import com.example.PaymentSystem.entity.User;
+import com.example.PaymentSystem.exceptions.ResourceNotFoundException;
 import com.example.PaymentSystem.service.BillService;
 import com.example.PaymentSystem.service.BillerService;
 import com.example.PaymentSystem.service.UserService;
@@ -74,8 +75,8 @@ public class UserController {
 		return userService.createUser(user);
 	}
 	
-	@PostMapping("/biller/{billerId}/user/{userId}/bill")
-	public Bill createBill(@PathVariable long billerId, @PathVariable long userId, @RequestBody Bill bill) {
+	@PostMapping("/biller/{billerId}/user/{userId}/bill") 
+	public Bill createBill(@PathVariable long billerId, @PathVariable long userId, @RequestBody Bill bill) throws ResourceNotFoundException {
 		return billService.createBill(billerId, userId, bill);
 	}
 	
