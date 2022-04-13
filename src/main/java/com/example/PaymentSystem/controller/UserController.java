@@ -1,8 +1,15 @@
 package com.example.PaymentSystem.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +26,7 @@ import com.example.PaymentSystem.entity.User;
 import com.example.PaymentSystem.exceptions.ResourceNotFoundException;
 import com.example.PaymentSystem.service.BillService;
 import com.example.PaymentSystem.service.BillerService;
+import com.example.PaymentSystem.service.CsvService;
 import com.example.PaymentSystem.service.UserService;
 
 @RestController
@@ -34,6 +42,10 @@ public class UserController {
 	@Autowired
 	BillService billService;
 	
+	@Autowired
+	CsvService fileService;
+	
+	@CrossOrigin
 	@GetMapping("/users")
 	public List<User> getAllUsers(){
 		return userService.getAllUsers();

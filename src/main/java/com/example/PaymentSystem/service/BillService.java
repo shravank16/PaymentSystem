@@ -1,5 +1,6 @@
 package com.example.PaymentSystem.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.PaymentSystem.Repository.BillRepository;
 import com.example.PaymentSystem.Repository.BillerRepository;
+import com.example.PaymentSystem.Repository.TransactionRepository;
 import com.example.PaymentSystem.Repository.UserRepository;
 import com.example.PaymentSystem.entity.Bill;
 import com.example.PaymentSystem.entity.Biller;
+import com.example.PaymentSystem.entity.Transaction;
 import com.example.PaymentSystem.entity.User;
 import com.example.PaymentSystem.exceptions.ResourceNotFoundException;
 
@@ -28,6 +31,12 @@ public class BillService {
 	
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	TransactionRepository transactionRepo;
+	
+	@Autowired
+	EmailService emailService;
 	
 	public List<Bill> getBillsById(long billId){
 		log.info("get bill by id");
@@ -60,6 +69,8 @@ public class BillService {
 	
 	public void payBill(long id, double amount) {
 		log.info("Paid bill");
+		transactionRepo.save(new Transaction(amount, new Date(), "Description"));
+		emailService.sendemail("Test email", "Testing email service", "shravankumar5410@gmail.com");
 		billRepo.payBill(id, amount);
 	}
 	

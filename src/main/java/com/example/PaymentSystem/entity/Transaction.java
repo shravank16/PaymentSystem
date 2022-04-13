@@ -30,15 +30,10 @@ public class Transaction {
 		super();
 	}
 
-	public Transaction(long id, User owner, Bill bill, Date date, Double amount, String transactionType,
-			String description) {
+	public Transaction(Double amount, Date date, String description) {
 		super();
-		this.id = id;
-		this.owner = owner;
-		this.bill = bill;
 		this.date = date;
 		this.amount = amount;
-		this.transactionType = transactionType;
 		this.description = description;
 	}
 
